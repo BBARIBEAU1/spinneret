@@ -1,0 +1,66 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "spinneret"
+dynamic = ["version"]
+description = "Terminal notes and reporting for penetration tests"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [{ name = "Brandon" }]
+keywords = ["pentest", "notes", "textual", "tui", "cvss", "security"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Security",
+]
+dependencies = [
+    "textual>=1.0,<9",
+    "PyYAML>=6.0",
+    "fpdf2>=2.8",
+    "pillow>=10",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6", "pypdf>=5"]
+
+[project.scripts]
+spinneret = "spinneret.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/BBARIBEAU1/spinneret"
+Repository = "https://github.com/BBARIBEAU1/spinneret"
+
+[tool.hatch.version]
+path = "src/spinneret/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/spinneret"]
+
+[tool.hatch.build.targets.wheel.sources]
+"src" = ""
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["spinneret"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
