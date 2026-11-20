@@ -1,0 +1,249 @@
+Screen {
+    background: #070b0a;
+    color: #e7f0ea;
+}
+
+Footer {
+    background: #0c1210;
+    color: #8ea197;
+}
+
+DataTable {
+    background: #0c1210;
+    color: #e7f0ea;
+}
+
+DataTable > .datatable--header {
+    background: #12201a;
+    color: #7dffb3;
+    text-style: bold;
+}
+
+DataTable > .datatable--cursor {
+    background: #1b3a2c;
+    color: #f4fff8;
+}
+
+TextArea {
+    background: #090d0c;
+    color: #e7f0ea;
+}
+
+Input {
+    background: #101816;
+    color: #e7f0ea;
+    border: tall #1e3a2e;
+}
+
+Input:focus, TextArea:focus {
+    border: tall #3d8f62;
+}
+
+Button {
+    width: auto;
+    min-width: 8;
+    height: 3;
+    margin: 0 1 0 0;
+    background: #15241c;
+    color: #d5ffe8;
+    border: none;
+}
+
+Button:hover {
+    background: #1d3328;
+}
+
+Button.phase.-active {
+    background: #1d4a34;
+    color: #f3fff7;
+}
+
+#splash {
+    height: 6;
+    padding: 1 2 0 2;
+}
+
+#root-path, #empty-hint, .hint {
+    color: #8ea197;
+    height: auto;
+    padding: 0 2;
+}
+
+#phase-bar, #action-bar, #finding-actions, .button-row {
+    height: auto;
+    padding: 0 1;
+}
+
+#save-state {
+    width: 1fr;
+    height: 3;
+    content-align: right middle;
+    color: #8ea197;
+    padding: 0 1;
+}
+
+#save-state.unsaved {
+    color: #e6c07b;
+}
+
+#workspace-body {
+    height: 1fr;
+}
+
+#editor-pane {
+    width: 2fr;
+    height: 1fr;
+    padding: 0 1;
+}
+
+#side-pane {
+    width: 1fr;
+    height: 1fr;
+    padding: 0 1 0 0;
+}
+
+#note-editor, #findings-table, #engagement-table, #box-table {
+    height: 1fr;
+    border: round #1e3a2e;
+}
+
+#meta, #brand {
+    height: auto;
+    padding: 0 1;
+    color: #b7cfc2;
+}
+
+#meta {
+    background: #101816;
+    margin: 0 0 1 0;
+}
+
+.pane-title, .modal-title {
+    color: #7dffb3;
+    text-style: bold;
+    height: 1;
+}
+
+.modal-title {
+    margin: 0 0 1 0;
+}
+
+ModalScreen {
+    align: center middle;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.dialog {
+    width: 78;
+    height: auto;
+    max-height: 90%;
+    background: #101816;
+    border: round #24543c;
+    padding: 1 2;
+}
+
+#finding-dialog {
+    width: 96;
+    height: 42;
+}
+
+#cheat-dialog {
+    width: 104;
+    height: 40;
+}
+
+#help-dialog {
+    width: 92;
+    height: 36;
+}
+
+#summary-dialog {
+    width: 90;
+    height: 32;
+}
+
+#box-dialog {
+    width: 96;
+    height: auto;
+}
+
+#box-grid {
+    layout: grid;
+    grid-size: 4;
+    grid-gutter: 0 1;
+    height: auto;
+    margin: 0 0 1 0;
+}
+
+#box-grid Label {
+    height: 3;
+    margin: 0;
+    content-align: left middle;
+}
+
+#finding-fields {
+    height: 1fr;
+}
+
+#metric-grid {
+    layout: grid;
+    grid-size: 4;
+    grid-gutter: 0 1;
+    height: auto;
+    margin: 0 0 1 0;
+}
+
+#metric-grid Label {
+    height: 3;
+    content-align: left middle;
+    color: #8ea197;
+}
+
+#find-description, #find-remediation, #find-evidence, #scratch-text, #summary-editor {
+    height: 6;
+    margin: 0 0 1 0;
+}
+
+#score {
+    text-style: bold;
+    height: 1;
+    margin: 0 0 1 0;
+}
+
+.severity-critical {
+    color: #ff5d5d;
+}
+
+.severity-high {
+    color: #ff9f43;
+}
+
+.severity-medium {
+    color: #f6c945;
+}
+
+.severity-low {
+    color: #6cb6ff;
+}
+
+.severity-none {
+    color: #8ea197;
+}
+
+.bad-score {
+    color: #ff5d5d;
+}
+
+#cheat-preview {
+    height: 8;
+    background: #090d0c;
+    color: #d5ffe8;
+    padding: 1;
+    margin: 1 0;
+}
+
+Label {
+    color: #8ea197;
+    height: 1;
+    margin: 1 0 0 0;
+}
